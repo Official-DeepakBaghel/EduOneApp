@@ -1,0 +1,59 @@
+name: eduone
+description: "A new Flutter project."
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.11.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # Sub-app folders are integrated directly into lib, no need for path dependencies
+  # unless they have their own pubspec.yaml (which they don't seem to have).
+  # collage_bunk_detector:
+  #   path: lib/collage_bunk_detector
+  # degree2dream:
+  #   path: lib/degree2dream
+  # edunotes_hub:
+  #   path: lib/edunotes_hub
+  # elibrary:
+  #   path: lib/elibrary
+
+  cached_network_image: ^3.4.1 
+  material_symbols_icons: ^4.2873.0
+  cupertino_icons: ^1.0.8
+  carousel_slider: ^5.1.2
+  circle_nav_bar: ^2.2.0
+  flutter_svg: ^2.2.4
+  camera: ^0.11.3
+  get: ^4.7.3
+  google_fonts: ^8.0.2
+  animate_do: ^4.2.0
+  glassmorphism: ^3.0.0
+  iconsax_flutter: ^1.0.1
+  lottie: ^3.3.2
+  animations: ^2.1.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+  flutter_native_splash: ^2.4.6
+
+flutter_native_splash:
+  color: "#FFFFFF"
+  image: assets/images/apgi_logo.png
+  android: true
+  ios: true
+  web: false
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/svg/
+    
