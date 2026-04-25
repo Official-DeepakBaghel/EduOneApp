@@ -1,6 +1,6 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:eduone/view/degree2dream/core/constants/app_colors.dart';
-import 'package:eduone/view/degree2dream/data/models/mentor_model.dart';
+import 'package:eduone/model/Degree2DreamModel/mentor_model.dart';
 import 'package:eduone/view/degree2dream/ui/screens/call_screen.dart';
 import 'package:eduone/view/degree2dream/ui/screens/chat_screen.dart';
 import 'package:flutter/material.dart';

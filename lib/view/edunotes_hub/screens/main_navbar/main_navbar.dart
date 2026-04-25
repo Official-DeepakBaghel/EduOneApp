@@ -1,7 +1,7 @@
 import 'package:eduone/view/edunotes_hub/screens/bookmark/bookmark_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../controllers/main_navbar_controller.dart';
+import 'package:eduone/controller/EduNotesHubController/main_navbar_controller.dart';
 import '../home/home_screen.dart';
 
 import '../upload/upload_screen.dart';

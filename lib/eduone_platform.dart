@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:eduone/model/LocalDB/local_db.dart';
 
 import 'package:eduone/view/collage_bunk_detector/bottumNavBar.dart' as bunk;
 import 'package:eduone/view/degree2dream/ui/screens/home_screen.dart' as degree;
 import 'package:eduone/view/edunotes_hub/screens/main_navbar/main_navbar.dart'
     as notes;
-import 'package:eduone/view/edunotes_hub/controllers/note_controller.dart';
-import 'package:eduone/view/edunotes_hub/controllers/playlist_controller.dart';
-import 'package:eduone/view/edunotes_hub/controllers/main_navbar_controller.dart';
+import 'package:eduone/controller/EduNotesHubController/note_controller.dart';
+import 'package:eduone/controller/EduNotesHubController/playlist_controller.dart';
+import 'package:eduone/controller/EduNotesHubController/main_navbar_controller.dart';
 
 import 'view/auth/loginscreen.dart';
+import 'view/edunotificationscreen.dart';
 
 import 'view/auth/verificationscreen.dart';
 import 'view/auth/splash_screen.dart';
@@ -45,22 +47,15 @@ class EduOneApp extends StatelessWidget {
         textTheme: GoogleFonts.outfitTextTheme(),
       ),
       initialRoute: '/splash',
-      getPages: [
-        GetPage(name: '/splash', page: () => const SplashScreen()),
-        GetPage(
-          name: '/role_selection',
-          page: () => const RoleSelectionScreen(),
-        ),
-        GetPage(name: '/login', page: () => const Loginscreen()),
-        GetPage(name: '/verificationscreen', page: () => VerificationScreen()),
-        GetPage(name: '/platform_home', page: () => const EduOneHome()),
-
-        GetPage(
-          name: '/bottomnavbarscreen',
-          page: () => const bunk.Bottomnavbarscreen(),
-        ),
-        GetPage(name: '/home', page: () => const notes.MainNavBar()),
-      ],
+      routes: {
+        '/splash': (context) => const SplashScreen(),
+        '/role_selection': (context) => const RoleSelectionScreen(),
+        '/login': (context) => const Loginscreen(),
+        '/verificationscreen': (context) => VerificationScreen(),
+        '/platform_home': (context) => const EduOneHome(),
+        '/bottomnavbarscreen': (context) => const bunk.Bottomnavbarscreen(),
+        '/home': (context) => const notes.MainNavBar(),
+      },
     );
   }
 }
@@ -125,12 +120,67 @@ class EduOneHome extends StatelessWidget {
             actions: [
               IconButton(
                 icon: const Icon(Icons.notifications_none, color: Colors.white),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const EduNotificationScreen(),
+                    ),
+                  );
+                },
               ),
-              const CircleAvatar(
-                radius: 18,
-                backgroundColor: Colors.white24,
-                child: Icon(Icons.person, color: Colors.white, size: 20),
+              PopupMenuButton<String>(
+                offset: const Offset(0, 48),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(14),
+                ),
+                color: const Color(0xFF1E1035),
+                onSelected: (value) {
+                  if (value == 'logout') {
+                    LocalDB.deleteToken();
+                    Get.offAllNamed('/role_selection');
+                  } else if (value == 'profile') {
+                    // TODO: Navigate to profile screen
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Profile coming soon!')),
+                    );
+                  }
+                },
+                itemBuilder: (context) => [
+                  PopupMenuItem(
+                    value: 'profile',
+                    child: Row(
+                      children: const [
+                        Icon(
+                          Icons.person_outline,
+                          color: Color(0xFFFAF2A0),
+                          size: 20,
+                        ),
+                        SizedBox(width: 10),
+                        Text('Profile', style: TextStyle(color: Colors.white)),
+                      ],
+                    ),
+                  ),
+                  const PopupMenuDivider(),
+                  PopupMenuItem(
+                    value: 'logout',
+                    child: Row(
+                      children: const [
+                        Icon(Icons.logout, color: Colors.redAccent, size: 20),
+                        SizedBox(width: 10),
+                        Text(
+                          'Logout',
+                          style: TextStyle(color: Colors.redAccent),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+                child: const CircleAvatar(
+                  radius: 18,
+                  backgroundColor: Colors.white24,
+                  child: Icon(Icons.person, color: Colors.white, size: 20),
+                ),
               ),
               const SizedBox(width: 16),
             ],

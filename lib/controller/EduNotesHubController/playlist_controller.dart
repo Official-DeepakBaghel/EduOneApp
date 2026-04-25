@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
-import '../models/note_model.dart';
-import '../models/playlist_model.dart';
-import '../utils/dummy_data.dart';
+import 'package:eduone/model/EduNotesHubModel/note_model.dart';
+import 'package:eduone/model/EduNotesHubModel/playlist_model.dart';
+import 'package:eduone/view/edunotes_hub/utils/dummy_data.dart';
 
 class PlaylistController extends GetxController {
   var playlists = <Playlist>[].obs;

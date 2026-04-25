@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../controllers/playlist_controller.dart';
-import '../../models/note_model.dart';
-import '../../models/playlist_model.dart';
+import 'package:eduone/controller/EduNotesHubController/playlist_controller.dart';
+import 'package:eduone/model/EduNotesHubModel/note_model.dart';
+import 'package:eduone/model/EduNotesHubModel/playlist_model.dart';
 import '../../utils/app_colors.dart';
 import '../note_details/note_details_screen.dart';
 

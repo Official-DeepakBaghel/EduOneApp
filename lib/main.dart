@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
-import 'package:eduone/view/collage_bunk_detector/main.dart' as cb;
+import 'package:eduone/view/collage_bunk_detector/camera_globals.dart' as cb;
 import 'eduone_platform.dart';
 
 void main() async {

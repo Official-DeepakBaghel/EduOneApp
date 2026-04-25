@@ -1,5 +1,5 @@
-import '../models/note_model.dart';
-import '../models/playlist_model.dart';
+import 'package:eduone/model/EduNotesHubModel/note_model.dart';
+import 'package:eduone/model/EduNotesHubModel/playlist_model.dart';
 
 class DummyData {
   static final List<Note> notes = [

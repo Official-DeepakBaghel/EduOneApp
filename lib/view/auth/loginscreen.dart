@@ -1,19 +1,75 @@
 import 'dart:ui';
+import 'package:eduone/controller/Auth/AuthController.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class Loginscreen extends StatelessWidget {
+class Loginscreen extends StatefulWidget {
   const Loginscreen({super.key});
+
+  @override
+  State<Loginscreen> createState() => _LoginscreenState();
+}
+
+class _LoginscreenState extends State<Loginscreen> {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController idController = TextEditingController();
+
+  final Authcontroller _authController = Get.put(Authcontroller());
+
+  bool _isLoading = false;
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    idController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _handleLogin(String role) async {
+    if (idController.text.trim().isEmpty ||
+        emailController.text.trim().isEmpty ||
+        passwordController.text.trim().isEmpty) {
+      Get.snackbar(
+        'Missing Fields',
+        'Please fill in all fields',
+        backgroundColor: Colors.red.withValues(alpha: 0.8),
+        colorText: Colors.white,
+      );
+      return;
+    }
+
+    setState(() => _isLoading = true);
+
+    if (role == 'student') {
+      await _authController.studentLogin(
+        emailController.text.trim(),
+        passwordController.text.trim(),
+        idController.text.trim(),
+      );
+    } else {
+      await _authController.teacherLogin(
+        emailController.text.trim(),
+        passwordController.text.trim(),
+        idController.text.trim(),
+      );
+    }
+
+    if (mounted) {
+      setState(() => _isLoading = false);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     final Map<String, dynamic> args = Get.arguments ?? {'role': 'student'};
     final String role = args['role'] ?? 'student';
-    Size size = MediaQuery.sizeOf(context);
+    final Size size = MediaQuery.sizeOf(context);
 
     return Scaffold(
       backgroundColor: Colors.black,
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       body: Container(
         width: double.infinity,
         height: double.infinity,
@@ -26,7 +82,7 @@ class Loginscreen extends StatelessWidget {
         child: Stack(
           children: [
             Positioned.fill(
-              child: Container(color: Colors.black.withOpacity(0.3)),
+              child: Container(color: Colors.black.withValues(alpha: 0.3)),
             ),
 
             SingleChildScrollView(
@@ -46,18 +102,18 @@ class Loginscreen extends StatelessWidget {
                         horizontal: 20,
                       ),
                       decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.05),
+                        color: Colors.white.withValues(alpha: 0.05),
                         borderRadius: BorderRadius.circular(30),
                         border: Border.all(
-                          color: Colors.white.withOpacity(0.1),
+                          color: Colors.white.withValues(alpha: 0.1),
                           width: 1.5,
                         ),
                         gradient: LinearGradient(
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
                           colors: [
-                            Colors.white.withOpacity(0.1),
-                            Colors.white.withOpacity(0.05),
+                            Colors.white.withValues(alpha: 0.1),
+                            Colors.white.withValues(alpha: 0.05),
                           ],
                         ),
                       ),
@@ -79,7 +135,7 @@ class Loginscreen extends StatelessWidget {
                                 ? "Student Login"
                                 : "Teacher Login",
                             style: const TextStyle(
-                              color: Color(0xFFFAF2A0), // Gold
+                              color: Color(0xFFFAF2A0),
                               fontSize: 28,
                               fontWeight: FontWeight.bold,
                               letterSpacing: 1.2,
@@ -96,7 +152,7 @@ class Loginscreen extends StatelessWidget {
                           Text(
                             'Log in to your ecosystem',
                             style: TextStyle(
-                              color: Colors.white.withOpacity(0.7),
+                              color: Colors.white.withValues(alpha: 0.7),
                               fontSize: 16,
                             ),
                           ),
@@ -104,108 +160,35 @@ class Loginscreen extends StatelessWidget {
                           const SizedBox(height: 30),
 
                           // ID Field
-                          Container(
-                            height: size.height * 0.06,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(
-                                size.width * 0.075,
-                              ),
-                              border: Border.all(
-                                color: const Color(0xFF673AB7),
-                                width: 1.5,
-                              ),
-                              color: Colors.white.withOpacity(0.05),
-                            ),
-                            child: Padding(
-                              padding: EdgeInsets.only(left: size.width * 0.05),
-                              child: TextField(
-                                style: const TextStyle(color: Colors.white),
-                                decoration: InputDecoration(
-                                  hintText: role == 'student'
-                                      ? "Student ID.."
-                                      : "Teacher ID..",
-                                  prefixIcon: Icon(
-                                    role == 'student'
-                                        ? Icons.school
-                                        : Icons.psychology,
-                                    color: const Color(0xFFFAF2A0),
-                                  ),
-                                  hintStyle: const TextStyle(
-                                    color: Colors.white70,
-                                  ),
-                                  border: InputBorder.none,
-                                  filled: false,
-                                ),
-                              ),
-                            ),
+                          _buildTextField(
+                            controller: idController,
+                            hintText: role == 'student'
+                                ? "Student ID.."
+                                : "Teacher ID..",
+                            icon: role == 'student'
+                                ? Icons.school
+                                : Icons.psychology,
+                            size: size,
                           ),
                           const SizedBox(height: 20),
 
-                          //email field
-                          Container(
-                            height: size.height * 0.06,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(
-                                size.width * 0.075,
-                              ),
-                              border: Border.all(
-                                color: const Color(0xFF673AB7),
-                                width: 1.5,
-                              ),
-                              color: Colors.white.withOpacity(0.05),
-                            ),
-                            child: Padding(
-                              padding: EdgeInsets.only(left: size.width * 0.05),
-                              child: TextField(
-                                style: const TextStyle(color: Colors.white),
-                                decoration: InputDecoration(
-                                  hintText: "Email..",
-                                  prefixIcon: Icon(
-                                    Icons.email,
-                                    color: const Color(0xFFFAF2A0),
-                                  ),
-                                  hintStyle: const TextStyle(
-                                    color: Colors.white70,
-                                  ),
-                                  border: InputBorder.none,
-                                  filled: false,
-                                ),
-                              ),
-                            ),
+                          // Email Field
+                          _buildTextField(
+                            controller: emailController,
+                            hintText: "Email..",
+                            icon: Icons.email,
+                            size: size,
+                            keyboardType: TextInputType.emailAddress,
                           ),
-
                           const SizedBox(height: 20),
 
                           // Password Field
-                          Container(
-                            height: size.height * 0.06,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(
-                                size.width * 0.075,
-                              ),
-                              border: Border.all(
-                                color: const Color(0xFF673AB7),
-                                width: 1.5,
-                              ),
-                              color: Colors.white.withOpacity(0.05),
-                            ),
-                            child: Padding(
-                              padding: EdgeInsets.only(left: size.width * 0.05),
-                              child: TextField(
-                                obscureText: true,
-                                style: const TextStyle(color: Colors.white),
-                                decoration: const InputDecoration(
-                                  hintText: "Password",
-                                  prefixIcon: Icon(
-                                    Icons.lock,
-                                    color: Color(0xFFFAF2A0),
-                                  ),
-                                  hintStyle: TextStyle(color: Colors.white70),
-                                  border: InputBorder.none,
-                                  filled: false,
-                                ),
-                              ),
-                            ),
+                          _buildTextField(
+                            controller: passwordController,
+                            hintText: "Password",
+                            icon: Icons.lock,
+                            size: size,
+                            obscureText: true,
                           ),
 
                           const SizedBox(height: 40),
@@ -235,20 +218,26 @@ class Loginscreen extends StatelessWidget {
                                     ),
                                   ),
                                 ),
-                                onPressed: () {
-                                  Navigator.pushReplacementNamed(
-                                    context,
-                                    '/platform_home',
-                                  );
-                                },
-                                child: const Text(
-                                  "Login Now",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18,
-                                  ),
-                                ),
+                                onPressed: _isLoading
+                                    ? null
+                                    : () => _handleLogin(role),
+                                child: _isLoading
+                                    ? const SizedBox(
+                                        height: 24,
+                                        width: 24,
+                                        child: CircularProgressIndicator(
+                                          color: Colors.white,
+                                          strokeWidth: 2.5,
+                                        ),
+                                      )
+                                    : const Text(
+                                        "Login Now",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 18,
+                                        ),
+                                      ),
                               ),
                             ),
                           ),
@@ -260,6 +249,40 @@ class Loginscreen extends StatelessWidget {
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTextField({
+    required TextEditingController controller,
+    required String hintText,
+    required IconData icon,
+    required Size size,
+    bool obscureText = false,
+    TextInputType keyboardType = TextInputType.text,
+  }) {
+    return Container(
+      height: size.height * 0.06,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(size.width * 0.075),
+        border: Border.all(color: const Color(0xFF673AB7), width: 1.5),
+        color: Colors.white.withValues(alpha: 0.05),
+      ),
+      child: Padding(
+        padding: EdgeInsets.only(left: size.width * 0.05),
+        child: TextField(
+          controller: controller,
+          obscureText: obscureText,
+          keyboardType: keyboardType,
+          style: const TextStyle(color: Colors.white),
+          decoration: InputDecoration(
+            hintText: hintText,
+            prefixIcon: Icon(icon, color: const Color(0xFFFAF2A0)),
+            hintStyle: const TextStyle(color: Colors.white70),
+            border: InputBorder.none,
+            filled: false,
+          ),
         ),
       ),
     );

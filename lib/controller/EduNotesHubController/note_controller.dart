@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import '../models/note_model.dart';
-import '../utils/dummy_data.dart';
+import 'package:eduone/model/EduNotesHubModel/note_model.dart';
+import 'package:eduone/view/edunotes_hub/utils/dummy_data.dart';
 
 class NoteController extends GetxController {
   var notes = <Note>[].obs;
@@ -21,9 +21,13 @@ class NoteController extends GetxController {
     if (query.isEmpty) {
       filteredNotes.assignAll(notes);
     } else {
-      filteredNotes.assignAll(notes.where((note) =>
-          note.title.toLowerCase().contains(query.toLowerCase()) ||
-          note.subject.toLowerCase().contains(query.toLowerCase())));
+      filteredNotes.assignAll(
+        notes.where(
+          (note) =>
+              note.title.toLowerCase().contains(query.toLowerCase()) ||
+              note.subject.toLowerCase().contains(query.toLowerCase()),
+        ),
+      );
     }
   }
 

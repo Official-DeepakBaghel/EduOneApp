@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:ui';
+import 'package:eduone/model/LocalDB/local_db.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -36,8 +37,17 @@ class _SplashScreenState extends State<SplashScreen>
 
     _controller.forward();
 
+    _checkLoginStatus();
+  }
+
+  Future<void> _checkLoginStatus() async {
+    final bool loggedIn = await LocalDB.isLoggedIn();
     Timer(const Duration(seconds: 3), () {
-      Get.offNamed('/role_selection');
+      if (loggedIn) {
+        Get.offAllNamed('/platform_home');
+      } else {
+        Get.offAllNamed('/role_selection');
+      }
     });
   }
 

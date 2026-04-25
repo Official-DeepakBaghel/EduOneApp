@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../controllers/note_controller.dart';
+import 'package:eduone/controller/EduNotesHubController/note_controller.dart';
 import '../../utils/app_colors.dart';
 import '../../widgets/note_card.dart';
 import '../note_details/note_details_screen.dart';

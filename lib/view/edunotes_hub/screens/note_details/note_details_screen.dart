@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../models/note_model.dart';
-import '../../controllers/note_controller.dart';
-import '../../controllers/playlist_controller.dart';
+import 'package:eduone/model/EduNotesHubModel/note_model.dart';
+import 'package:eduone/controller/EduNotesHubController/note_controller.dart';
+import 'package:eduone/controller/EduNotesHubController/playlist_controller.dart';
 import '../../utils/app_colors.dart';
 
 class NoteDetailsScreen extends StatelessWidget {

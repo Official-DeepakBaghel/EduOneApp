@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../controllers/note_controller.dart';
+import 'package:eduone/controller/EduNotesHubController/note_controller.dart';
 import '../../utils/app_colors.dart';
 import '../../widgets/note_card.dart';
 import '../note_details/note_details_screen.dart';
@@ -21,13 +21,28 @@ class BookmarkScreen extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.bookmark_border, size: 80, color: AppColors.textSecondary),
+                Icon(
+                  Icons.bookmark_border,
+                  size: 80,
+                  color: AppColors.textSecondary,
+                ),
                 SizedBox(height: 16),
-                Text('No bookmarks yet', style: TextStyle(color: AppColors.textSecondary, fontSize: 18)),
+                Text(
+                  'No bookmarks yet',
+                  style: TextStyle(
+                    color: AppColors.textSecondary,
+                    fontSize: 18,
+                  ),
+                ),
                 SizedBox(height: 8),
-                Text('Tap the bookmark icon on any note to save it here.',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(color: AppColors.textSecondary, fontSize: 14)),
+                Text(
+                  'Tap the bookmark icon on any note to save it here.',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: AppColors.textSecondary,
+                    fontSize: 14,
+                  ),
+                ),
               ],
             ),
           );

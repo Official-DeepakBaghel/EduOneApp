@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../models/note_model.dart';
+import 'package:eduone/model/EduNotesHubModel/note_model.dart';
 import '../utils/app_colors.dart';
 
 class NoteCard extends StatelessWidget {
