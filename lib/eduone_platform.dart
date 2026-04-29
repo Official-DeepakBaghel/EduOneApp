@@ -4,7 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:eduone/model/LocalDB/local_db.dart';
 
 import 'package:eduone/view/collage_bunk_detector/bottumNavBar.dart' as bunk;
-import 'package:eduone/view/degree2dream/ui/screens/home_screen.dart' as degree;
+import 'package:eduone/view/degree2dream/ui/screens/main_dashboard.dart'
+    as degree;
 import 'package:eduone/view/edunotes_hub/screens/main_navbar/main_navbar.dart'
     as notes;
 import 'package:eduone/controller/EduNotesHubController/note_controller.dart';
@@ -17,6 +18,7 @@ import 'view/edunotificationscreen.dart';
 import 'view/auth/verificationscreen.dart';
 import 'view/auth/splash_screen.dart';
 import 'view/auth/role_selection_screen.dart';
+import 'view/elibrary/library_home_screen.dart';
 
 class EduOneApp extends StatelessWidget {
   const EduOneApp({super.key});
@@ -55,6 +57,7 @@ class EduOneApp extends StatelessWidget {
         '/platform_home': (context) => const EduOneHome(),
         '/bottomnavbarscreen': (context) => const bunk.Bottomnavbarscreen(),
         '/home': (context) => const notes.MainNavBar(),
+        '/elibrary': (context) => LibraryHomeScreen(),
       },
     );
   }
@@ -232,7 +235,7 @@ class EduOneHome extends StatelessWidget {
                   'Career Discovery',
                   Icons.rocket_launch_rounded,
                   const Color(0xFFE91E63),
-                  () => Get.to(() => const degree.HomeScreen()),
+                  () => Get.to(() => const degree.MainDashboard()),
                 ),
                 _buildAppTile(
                   context,
@@ -248,7 +251,7 @@ class EduOneHome extends StatelessWidget {
                   'Digital Archive',
                   Icons.local_library_rounded,
                   const Color(0xFF4CAF50),
-                  () => _showComingSoon(context),
+                  () => Get.toNamed('/elibrary'),
                 ),
               ]),
             ),

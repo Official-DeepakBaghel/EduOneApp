@@ -38,9 +38,19 @@ class ProfileScreen extends StatelessWidget {
                       child: Icon(Icons.person, size: 50, color: Colors.white),
                     ),
                     const SizedBox(height: 12),
-                    const Text('Deepak Sharma', style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold)),
+                    const Text(
+                      'Deepak Sharma',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                     const SizedBox(height: 4),
-                    const Text('B.Tech • Computer Science', style: TextStyle(color: Colors.white70, fontSize: 14)),
+                    const Text(
+                      'B.Tech • Computer Science',
+                      style: TextStyle(color: Colors.white70, fontSize: 14),
+                    ),
                     const SizedBox(height: 20),
                   ],
                 ),
@@ -48,9 +58,14 @@ class ProfileScreen extends StatelessWidget {
             ),
             actions: [
               IconButton(
-                icon: Icon(isDark ? Icons.light_mode : Icons.dark_mode, color: Colors.white),
+                icon: Icon(
+                  isDark ? Icons.light_mode : Icons.dark_mode,
+                  color: Colors.white,
+                ),
                 onPressed: () {
-                  Get.changeThemeMode(isDark ? ThemeMode.light : ThemeMode.dark);
+                  Get.changeThemeMode(
+                    isDark ? ThemeMode.light : ThemeMode.dark,
+                  );
                 },
               ),
             ],
@@ -63,56 +78,92 @@ class ProfileScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // Stats row
-                  Obx(() => Row(
-                    children: [
-                      _StatCard(label: 'Notes', value: '${noteController.notes.length}', icon: Icons.description),
-                      const SizedBox(width: 12),
-                      _StatCard(label: 'Bookmarks', value: '${noteController.bookmarkedNotes.length}', icon: Icons.bookmark),
-                      const SizedBox(width: 12),
-                      const _StatCard(label: 'Uploads', value: '3', icon: Icons.upload),
-                    ],
-                  )),
+                  Obx(
+                    () => Row(
+                      children: [
+                        _StatCard(
+                          label: 'Notes',
+                          value: '${noteController.notes.length}',
+                          icon: Icons.description,
+                        ),
+                        const SizedBox(width: 12),
+                        _StatCard(
+                          label: 'Bookmarks',
+                          value: '${noteController.bookmarkedNotes.length}',
+                          icon: Icons.bookmark,
+                        ),
+                        const SizedBox(width: 12),
+                        const _StatCard(
+                          label: 'Uploads',
+                          value: '3',
+                          icon: Icons.upload,
+                        ),
+                      ],
+                    ),
+                  ),
                   const SizedBox(height: 28),
 
                   // Profile info section
                   _SectionHeader('Account Info'),
                   const SizedBox(height: 12),
-                  _InfoTile(icon: Icons.email_outlined, label: 'deepak@student.edu'),
-                  _InfoTile(icon: Icons.school_outlined, label: 'University of Science & Tech'),
-                  _InfoTile(icon: Icons.badge_outlined, label: 'Student ID: CS20240042'),
+                  _InfoTile(
+                    icon: Icons.email_outlined,
+                    label: 'deepak@student.edu',
+                  ),
+                  _InfoTile(
+                    icon: Icons.school_outlined,
+                    label: 'University of Science & Tech',
+                  ),
+                  _InfoTile(
+                    icon: Icons.badge_outlined,
+                    label: 'Student ID: CS20240042',
+                  ),
                   const SizedBox(height: 28),
 
                   // Uploaded notes
                   _SectionHeader('My Uploaded Notes'),
                   const SizedBox(height: 12),
-                  Obx(() => ListView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: noteController.notes.take(3).length,
-                    itemBuilder: (context, index) {
-                      final note = noteController.notes[index];
-                      return Padding(
-                        padding: const EdgeInsets.only(bottom: 12),
-                        child: NoteCard(
-                          note: note,
-                          onTap: () => Get.to(() => NoteDetailsScreen(note: note)),
-                        ),
-                      );
-                    },
-                  )),
+                  Obx(
+                    () => ListView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: noteController.notes.take(3).length,
+                      itemBuilder: (context, index) {
+                        final note = noteController.notes[index];
+                        return Padding(
+                          padding: const EdgeInsets.only(bottom: 12),
+                          child: NoteCard(
+                            note: note,
+                            onTap: () =>
+                                Get.to(() => NoteDetailsScreen(note: note)),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
                   const SizedBox(height: 28),
 
                   // Settings / actions
                   _SectionHeader('Settings'),
                   const SizedBox(height: 12),
-                  _SettingsTile(icon: Icons.notifications_outlined, label: 'Notifications', onTap: () {}),
-                  _SettingsTile(icon: Icons.lock_outline, label: 'Change Password', onTap: () {}),
-                  _SettingsTile(icon: Icons.language_outlined, label: 'Language', onTap: () {}),
+
+                  _SettingsTile(
+                    icon: Icons.lock_outline,
+                    label: 'Change Password',
+                    onTap: () {},
+                  ),
+                  _SettingsTile(
+                    icon: Icons.language_outlined,
+                    label: 'Language',
+                    onTap: () {},
+                  ),
                   _SettingsTile(
                     icon: Icons.logout,
-                    label: 'Logout',
+                    label: 'Go Back to Main App',
                     color: Colors.red,
-                    onTap: () => Get.back(),
+                    onTap: () => Navigator.of(
+                      context,
+                    ).pushReplacementNamed('/platform_home'),
                   ),
                   const SizedBox(height: 32),
                 ],
@@ -130,7 +181,11 @@ class _StatCard extends StatelessWidget {
   final String value;
   final IconData icon;
 
-  const _StatCard({required this.label, required this.value, required this.icon});
+  const _StatCard({
+    required this.label,
+    required this.value,
+    required this.icon,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -140,14 +195,29 @@ class _StatCard extends StatelessWidget {
         decoration: BoxDecoration(
           color: Theme.of(context).cardTheme.color,
           borderRadius: BorderRadius.circular(16),
-          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 8, offset: const Offset(0, 2))],
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.04),
+              blurRadius: 8,
+              offset: const Offset(0, 2),
+            ),
+          ],
         ),
         child: Column(
           children: [
             Icon(icon, color: AppColors.primary, size: 22),
             const SizedBox(height: 8),
-            Text(value, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
-            Text(label, style: const TextStyle(color: AppColors.textSecondary, fontSize: 12)),
+            Text(
+              value,
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+            ),
+            Text(
+              label,
+              style: const TextStyle(
+                color: AppColors.textSecondary,
+                fontSize: 12,
+              ),
+            ),
           ],
         ),
       ),
@@ -161,7 +231,12 @@ class _SectionHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(title, style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold));
+    return Text(
+      title,
+      style: Theme.of(
+        context,
+      ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+    );
   }
 }
 
@@ -191,11 +266,17 @@ class _SettingsTile extends StatelessWidget {
   final VoidCallback onTap;
   final Color? color;
 
-  const _SettingsTile({required this.icon, required this.label, required this.onTap, this.color});
+  const _SettingsTile({
+    required this.icon,
+    required this.label,
+    required this.onTap,
+    this.color,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final c = color ?? Theme.of(context).textTheme.bodyLarge?.color ?? Colors.black;
+    final c =
+        color ?? Theme.of(context).textTheme.bodyLarge?.color ?? Colors.black;
     return Card(
       margin: const EdgeInsets.only(bottom: 8),
       elevation: 1,

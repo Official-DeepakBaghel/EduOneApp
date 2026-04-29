@@ -81,6 +81,7 @@ class _UploadScreenState extends State<UploadScreen> {
                         ),
                         const SizedBox(height: 8),
                         DropdownButtonFormField<String>(
+                          isExpanded: true,
                           value: _selectedCourse,
                           items: _courses
                               .map(
@@ -108,6 +109,7 @@ class _UploadScreenState extends State<UploadScreen> {
                         ),
                         const SizedBox(height: 8),
                         DropdownButtonFormField<String>(
+                          isExpanded: true,
                           value: _selectedSubject,
                           items: _subjects
                               .map(
