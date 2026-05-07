@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 
 class Repo {
   final String baseUrl = "https://wxdwgnvr-5000.inc1.devtunnels.ms";
-                          
+
   final String token = "";
 
   Future<StudentLoginModel> studentLogin({

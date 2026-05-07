@@ -25,25 +25,6 @@ class LibraryHomeScreen extends StatelessWidget {
         elevation: 0,
         actions: [
           Obx(
-            () => IconButton(
-              onPressed: () {
-                controller.setRole(
-                  controller.userRole.value == 'student'
-                      ? 'teacher'
-                      : 'student',
-                );
-              },
-              icon: Icon(
-                controller.userRole.value == 'student'
-                    ? Icons.school
-                    : Icons.admin_panel_settings,
-                color: Colors.blueAccent,
-              ),
-              tooltip:
-                  'Switch to ${controller.userRole.value == 'student' ? 'Teacher' : 'Student'}',
-            ),
-          ),
-          Obx(
             () => controller.userRole.value == 'teacher'
                 ? IconButton(
                     onPressed: () => Get.to(() => IssueRecordsScreen()),

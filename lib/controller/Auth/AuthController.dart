@@ -13,8 +13,9 @@ class Authcontroller extends GetxController {
       id: id,
     );
     if (response.message == "Login Successfully") {
-      // Save Token
+      // Save Token and Role
       await LocalDB.saveToken(response.token);
+      await LocalDB.saveRole('student');
       Get.offAllNamed("/platform_home");
     } else {
       Get.snackbar(
@@ -34,8 +35,9 @@ class Authcontroller extends GetxController {
       id: id,
     );
     if (response.message == "Login Successfully") {
-      // Save Token
+      // Save Token and Role
       await LocalDB.saveToken(response.token);
+      await LocalDB.saveRole('teacher');
       Get.offAllNamed("/platform_home");
     } else {
       Get.snackbar(

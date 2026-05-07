@@ -1,3 +1,4 @@
+import 'package:eduone/model/LocalDB/local_db.dart';
 import 'package:get/get.dart';
 import '../../model/ElibraryModel/book_model.dart';
 import '../../model/ElibraryModel/issue_record_model.dart';
@@ -16,7 +17,15 @@ class LibraryController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    _loadRole();
     loadMockBooks();
+  }
+
+  Future<void> _loadRole() async {
+    final savedRole = await LocalDB.getRole();
+    if (savedRole != null) {
+      userRole.value = savedRole;
+    }
   }
 
   void setRole(String role) {

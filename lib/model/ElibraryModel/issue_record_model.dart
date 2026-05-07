@@ -25,14 +25,11 @@ class IssueRecord {
     this.isReturned = false,
   });
 
-  IssueRecord copyWith({
-    DateTime? returnDate,
-    bool? isReturned,
-  }) {
+  IssueRecord copyWith({DateTime? returnDate, bool? isReturned}) {
     return IssueRecord(
       id: id,
       studentName: studentName,
-      fatherName: fatherName,
+      fatherName: fatherName, 
       course: course,
       semesterYear: semesterYear,
       rollNumber: rollNumber,

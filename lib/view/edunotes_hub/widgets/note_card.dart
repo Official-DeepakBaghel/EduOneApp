@@ -36,7 +36,9 @@ class NoteCard extends StatelessWidget {
           children: [
             // Preview Image
             ClipRRect(
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
+              borderRadius: const BorderRadius.vertical(
+                top: Radius.circular(20),
+              ),
               child: Image.network(
                 note.previewUrl,
                 height: 140,
@@ -45,7 +47,11 @@ class NoteCard extends StatelessWidget {
                 errorBuilder: (context, error, stackTrace) => Container(
                   height: 140,
                   color: AppColors.primary.withOpacity(0.1),
-                  child: const Icon(Icons.description, size: 40, color: AppColors.primary),
+                  child: const Icon(
+                    Icons.description,
+                    size: 40,
+                    color: AppColors.primary,
+                  ),
                 ),
               ),
             ),
@@ -54,17 +60,22 @@ class NoteCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                   Row(
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 8,
+                          vertical: 4,
+                        ),
                         decoration: BoxDecoration(
                           color: AppColors.primary.withOpacity(0.1),
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Text(
                           note.subject,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                           style: const TextStyle(
                             color: AppColors.primary,
                             fontSize: 10,
@@ -74,11 +85,18 @@ class NoteCard extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                          const Icon(Icons.remove_red_eye_outlined, size: 14, color: AppColors.textSecondary),
+                          const Icon(
+                            Icons.remove_red_eye_outlined,
+                            size: 14,
+                            color: AppColors.textSecondary,
+                          ),
                           const SizedBox(width: 4),
                           Text(
                             '${note.views}',
-                            style: const TextStyle(fontSize: 12, color: AppColors.textSecondary),
+                            style: const TextStyle(
+                              fontSize: 12,
+                              color: AppColors.textSecondary,
+                            ),
                           ),
                         ],
                       ),
@@ -97,6 +115,8 @@ class NoteCard extends StatelessWidget {
                   const SizedBox(height: 4),
                   Text(
                     note.course,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                     style: const TextStyle(
                       color: AppColors.textSecondary,
                       fontSize: 12,

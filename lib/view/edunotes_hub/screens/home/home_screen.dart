@@ -52,7 +52,7 @@ class HomeScreen extends StatelessWidget {
             ),
             const SizedBox(height: 12),
             SizedBox(
-              height: 270,
+              height: 300,
               child: Obx(
                 () => ListView.builder(
                   scrollDirection: Axis.horizontal,

@@ -124,11 +124,14 @@ class HomeScreen extends StatelessWidget {
                 shape: BoxShape.circle,
                 color: AppColors.background,
               ),
-              child: const CircleAvatar(
+              child: CircleAvatar(
                 radius: 26,
-                backgroundImage: NetworkImage(
+                backgroundColor: AppColors.surface,
+                backgroundImage: const NetworkImage(
                   "https://i.pravatar.cc/150?u=alex",
                 ),
+                onBackgroundImageError: (exception, stackTrace) =>
+                    const Icon(Iconsax.user_copy, color: AppColors.primary),
               ),
             ),
           ),
@@ -254,7 +257,7 @@ class HomeScreen extends StatelessWidget {
   Widget _buildFeaturedMentors() {
     final mentors = Mentor.mockMentors;
     return SizedBox(
-      height: 300,
+      height: 330,
       child: ListView.builder(
         padding: const EdgeInsets.symmetric(horizontal: 24),
         scrollDirection: Axis.horizontal,

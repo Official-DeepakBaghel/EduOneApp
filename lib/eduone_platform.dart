@@ -19,6 +19,7 @@ import 'view/auth/verificationscreen.dart';
 import 'view/auth/splash_screen.dart';
 import 'view/auth/role_selection_screen.dart';
 import 'view/elibrary/library_home_screen.dart';
+import 'view/getBusDestination/getBusDestination.dart';
 
 class EduOneApp extends StatelessWidget {
   const EduOneApp({super.key});
@@ -58,6 +59,7 @@ class EduOneApp extends StatelessWidget {
         '/bottomnavbarscreen': (context) => const bunk.Bottomnavbarscreen(),
         '/home': (context) => const notes.MainNavBar(),
         '/elibrary': (context) => LibraryHomeScreen(),
+        '/bus_tracking': (context) => GetBusDestination(),
       },
     );
   }
@@ -252,6 +254,14 @@ class EduOneHome extends StatelessWidget {
                   Icons.local_library_rounded,
                   const Color(0xFF4CAF50),
                   () => Get.toNamed('/elibrary'),
+                ),
+                _buildAppTile(
+                  context,
+                  'Bus Tracking',
+                  'Live ETA & Route',
+                  Icons.directions_bus_rounded,
+                  const Color(0xFF03A9F4),
+                  () => Get.toNamed('/bus_tracking'),
                 ),
               ]),
             ),
